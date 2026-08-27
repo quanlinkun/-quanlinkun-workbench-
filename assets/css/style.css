@@ -70,7 +70,7 @@ body {
 
 /* 顶栏 */
 #topbar {
-  display: none;
+  display: flex;
   align-items: center; gap: 12px;
   padding: 10px 16px;
   background: linear-gradient(90deg, var(--gold), var(--gold-2));
@@ -83,6 +83,7 @@ body {
   width: 40px; height: 40px; font-size: 20px; cursor: pointer;
 }
 .icon-btn:hover { background: var(--red-dark); }
+#menuBtn { display: none; }
 
 /* 内容区 */
 #content { flex: 1; padding: 24px; margin-left: 240px; min-width: 0; }
@@ -102,6 +103,10 @@ body {
 .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 900px){ .grid-cols-4 { grid-template-columns: repeat(2,1fr);} }
 @media (max-width: 560px){ .grid-cols-4,.grid-cols-2 { grid-template-columns: 1fr; } }
+.responsive-split { grid-template-columns: 2fr 1fr; }
+@media (max-width: 760px){ .responsive-split { grid-template-columns: 1fr; } }
+.card.grid-card { transition: transform .15s ease, box-shadow .15s ease; }
+.card.grid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(139,105,20,.2); }
 
 /* 标签 */
 .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
@@ -181,7 +186,7 @@ details.collapsible[open] { box-shadow: var(--shadow); }
   #sidebar { transform: translateX(-100%); box-shadow: 4px 0 24px rgba(0,0,0,.3); }
   #sidebar.open { transform: translateX(0); }
   #content { margin-left: 0; padding: 16px; }
-  #topbar { display: flex; }
+  #menuBtn { display: inline-flex; }
   .close-btn { display: block; background: rgba(255,255,255,.15); color:#fff; }
   .logo { font-size: 16px; }
 }

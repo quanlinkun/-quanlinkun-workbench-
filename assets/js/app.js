@@ -473,7 +473,7 @@ function calendarBody(){
       <h2 style="margin:0">📅 ${y}年${m+1}月</h2>
       <button class="btn ghost" onclick="calShift(1)">下月 ▶️</button>
     </div>
-    <div class="grid" style="grid-template-columns:2fr 1fr">
+    <div class="grid responsive-split">
       <div class="card">
         <div class="cal-grid">${head}${cells}</div>
         <div id="dayPanel" class="card" style="margin-top:14px"></div>
