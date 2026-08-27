@@ -196,3 +196,43 @@ details.collapsible[open] { box-shadow: var(--shadow); }
   .logo { font-size: 16px; }
 }
 @media (min-width: 761px){ .close-btn { display: none !important; } }
+
+/* ===== 雅思学习模块 ===== */
+.ielts-bar { background: linear-gradient(135deg, var(--sidebar-from), var(--sidebar-to)); color: #f6e9c8; border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.bar-name { font-weight: 800; font-size: 18px; color: var(--gold); }
+.bar-stats { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.bstat { text-align: center; min-width: 60px; }
+.bs-num { display: block; font-size: 20px; font-weight: 800; color: #fff; }
+.bs-lab { font-size: 11px; opacity: .85; }
+.btn.small { padding: 6px 12px; font-size: 13px; }
+.btn.ghost.small { padding: 6px 12px; font-size: 13px; }
+
+.ov-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px; box-shadow: var(--shadow); text-align: center; }
+.ov-ico { font-size: 28px; }
+.ov-name { font-weight: 700; margin: 4px 0 8px; }
+.ov-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); padding: 2px 0; }
+.ov-row b { color: var(--text-dark); }
+.ov-mastery { margin-top: 8px; font-size: 12px; background: #fff7d6; border-radius: 8px; padding: 4px; color: var(--red-dark); }
+
+.qbox { border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; margin: 10px 0; background: var(--card-bg); }
+.qbox.correct { border-color: #2a7d4f; box-shadow: 0 0 0 2px rgba(42,125,79,.25); }
+.qbox.wrong { border-color: var(--red); box-shadow: 0 0 0 2px rgba(230,57,70,.2); }
+.qhead { font-weight: 700; margin-bottom: 8px; }
+.qtag { background: var(--red); color: #fff; border-radius: 6px; padding: 1px 8px; font-size: 12px; margin-right: 6px; }
+.qbody { margin-bottom: 8px; }
+.qopt { display: block; font-size: 14px; margin: 4px 0; cursor: pointer; }
+.qopt input { width: auto; margin-right: 6px; }
+.explain { margin-top: 10px; background: #fffdf6; border: 1px dashed var(--card-border); border-radius: 10px; padding: 10px 12px; font-size: 14px; line-height: 1.7; }
+.explain p { margin: 5px 0; }
+
+.ie-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.ie-table th, .ie-table td { border: 1px solid var(--card-border); padding: 8px 10px; text-align: left; }
+.ie-table th { background: #fff7d6; color: var(--red-dark); }
+.ie-table input[type=checkbox] { width: 18px; height: 18px; }
+.cal-dur { position: absolute; bottom: 4px; left: 6px; font-size: 10px; color: var(--red-dark); font-weight: 700; }
+
+@media (max-width: 760px){
+  .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .bar-name { font-size: 16px; }
+  .bs-num { font-size: 17px; }
+}
