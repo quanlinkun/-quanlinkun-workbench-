@@ -158,7 +158,7 @@ async function loadNews(cat, force){
 function collapsible(title, inner){ return `<details class="collapsible"><summary>${title}</summary>${inner}</details>`; }
 function renderIelts(){
   const data = D.ielts;
-  const tabs = [["listening","👂 听力"],["speaking","🗣️ 口语"],["reading","📖 阅读"],["writing","✍️ 写作"]];
+  const tabs = [["listening","👂 听力"],["speaking","🗣️ 口语"],["reading","📖 阅读"],["writing","✍️ 写作"],["vocab","📚 单词背诵"]];
   const c = document.createElement("div"); c.className="page";
   c.innerHTML = `<div class="tabs" id="ieltsTabs">${tabs.map((t,i)=>`<button class="tab ${i===0?'active':''}" data-k="${t[0]}">${t[1]}</button>`).join("")}</div><div id="ieltsBody"></div>`;
   $("#content").appendChild(c);
@@ -189,12 +189,91 @@ function renderIelts(){
       h += `<div class="card"><h3>🔗 连接词表</h3><p>${data.writing.connectors.map(v=>`<span class="chip">${esc(v)}</span>`).join("")}</p></div>`;
       h += collapsible("📋 评分标准解读", `<p>${data.writing.criteria}</p>`);
     }
+    if(k!=="vocab" && data.practice[k]){
+      h += `<div class="card"><h3>📝 配套练习题（真实雅思题型）</h3>${data.practice[k].map((p,i)=>collapsible(`练习 ${i+1}：${esc(p.q.split("\n")[0])}`, `<pre class="pre-wrap">${esc(p.q)}</pre><p class="ans">✅ 答案：${esc(p.a)}</p>`)).join("")}</div>`;
+    }
+    if(k==="vocab"){ h += renderVocab(); }
     $("#ieltsBody").innerHTML = h;
+    if(k==="vocab") initVocab();
   }
   body("listening");
   $$("#ieltsTabs .tab").forEach(t=>t.onclick=()=>{
     $$("#ieltsTabs .tab").forEach(x=>x.classList.remove("active")); t.classList.add("active"); body(t.dataset.k);
   });
+}
+
+/* ---------- 雅思单词背诵 ---------- */
+function renderVocab(){
+  return `
+  <div class="card">
+    <h3>📚 我的单词本</h3>
+    <p class="muted">上传 txt（每行「单词 释义」或「单词,释义」），或手动添加。数据仅存本地。</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0">
+      <input id="vbWord" placeholder="单词" style="padding:8px;border:1px solid var(--gold);border-radius:8px">
+      <input id="vbMean" placeholder="释义" style="padding:8px;border:1px solid var(--gold);border-radius:8px;flex:1;min-width:120px">
+      <button class="btn" onclick="vbAdd()">➕ 添加</button>
+      <label class="btn ghost" style="cursor:pointer">📁 上传txt<input type="file" id="vbFile" accept=".txt" style="display:none" onchange="vbUpload(this)"></label>
+      <button class="btn ghost" onclick="vbExport()">⬇️ 导出</button>
+    </div>
+    <div id="vbStats" class="muted"></div>
+  </div>
+  <div class="card">
+    <div id="vbFlash" class="flashcard" onclick="vbFlip()"><div id="vbFront"></div></div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="btn" onclick="vbNext(false)">⬜ 不认识</button>
+      <button class="btn" onclick="vbNext(true)">✅ 认识</button>
+    </div>
+    <div id="vbList" style="margin-top:12px"></div>
+  </div>`;
+}
+function vbLoad(){ try { return JSON.parse(localStorage.getItem("wb_vocab")||"[]"); } catch(e){ return []; } }
+function vbSave(a){ localStorage.setItem("wb_vocab", JSON.stringify(a)); }
+function initVocab(){ window._vbIdx = 0; window._vbFlipped = false; vbRender(); }
+function vbRender(){
+  const a = vbLoad();
+  $("#vbStats").textContent = "共 " + a.length + " 个单词";
+  const front = $("#vbFront");
+  if(!a.length){ front.innerHTML = '<span class="muted">暂无单词，先添加或上传吧～</span>'; $("#vbList").innerHTML=""; return; }
+  const cur = a[window._vbIdx % a.length];
+  front.innerHTML = window._vbFlipped ? '<b style="color:var(--red-dark)">'+esc(cur.mean)+'</b>' : '<b style="font-size:22px">'+esc(cur.word)+'</b>';
+  let html = '<p class="muted" style="margin-top:8px">全部单词：</p>';
+  html += a.map(w=>`<span class="chip">${esc(w.word)} · ${esc(w.mean)}</span>`).join("");
+  $("#vbList").innerHTML = html;
+}
+function vbFlip(){ window._vbFlipped = !window._vbFlipped; vbRender(); }
+function vbNext(known){
+  const a = vbLoad(); if(!a.length) return;
+  if(known){ const w=a.splice(window._vbIdx,1); a.push(w[0]); vbSave(a); }
+  window._vbIdx = (window._vbIdx + 1) % a.length;
+  window._vbFlipped = false; vbRender();
+}
+function vbAdd(){
+  const w = $("#vbWord").value.trim(), m = $("#vbMean").value.trim();
+  if(!w||!m) return;
+  const a = vbLoad(); a.push({word:w, mean:m}); vbSave(a);
+  $("#vbWord").value=""; $("#vbMean").value=""; initVocab();
+}
+function vbUpload(input){
+  const f = input.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = e => {
+    const a = vbLoad();
+    e.target.result.split(/\r?\n/).forEach(line=>{
+      const t = line.trim(); if(!t) return;
+      let parts = t.split(/[,，\t]/);
+      let w = parts[0], m = parts.slice(1).join(",").trim();
+      if(!m){ const sp = t.indexOf(" "); if(sp>0){ w=t.slice(0,sp); m=t.slice(sp+1).trim(); } else { w=t; m=""; } }
+      a.push({word:w.trim(), mean:m});
+    });
+    vbSave(a); initVocab();
+  };
+  r.readAsText(f);
+}
+function vbExport(){
+  const a = vbLoad(); if(!a.length) return;
+  const txt = a.map(w=>w.word+"\t"+w.mean).join("\n");
+  const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
+  const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download="我的单词表.txt"; link.click();
 }
 
 /* ---------- 数学 ---------- */
@@ -205,7 +284,8 @@ function renderMath(){
   c.innerHTML = `<div class="tabs" id="mathTabs">${tabs.map((t,i)=>`<button class="tab ${i===0?'active':''}" data-k="${t[0]}">${t[1]}</button>`).join("")}</div><div id="mathBody"></div>`;
   $("#content").appendChild(c);
   function body(k){
-    let h = `<div class="card"><h3>${data[k].title}</h3></div>`;
+    let h = renderMathUser();
+    h += `<div class="card"><h3>${data[k].title}</h3></div>`;
     const d = data[k];
     if(k==="high"){
       h += `<div class="card"><h3>📦 知识模块与公式</h3>${d.modules.map(m=>`<div style="margin:8px 0"><b>📘 ${m.name}</b><ul class="clean">${m.formulas.map(f=>`<li><code>${esc(f)}</code></li>`).join("")}</ul></div>`).join("")}</div>`;
@@ -241,6 +321,45 @@ function renderMath(){
     $$("#mathTabs .tab").forEach(x=>x.classList.remove("active")); t.classList.add("active"); body(t.dataset.k);
   });
 }
+
+/* ---------- 数学·我的上传课程 ---------- */
+function mcLoad(){ try { return JSON.parse(localStorage.getItem("wb_math_courses")||"[]"); } catch(e){ return []; } }
+function mcSave(a){ localStorage.setItem("wb_math_courses", JSON.stringify(a)); }
+function renderMathUser(){
+  const a = mcLoad();
+  let html = `<div class="card" style="border:2px dashed var(--gold)">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <h3>📤 我的课程（可上传 txt/md）</h3>
+      <button class="btn" onclick="mcToggleForm()">➕ 上传课程</button>
+    </div>
+    <div id="mcForm" style="display:none;margin-top:10px">
+      <input id="mcTitle" placeholder="课程标题（如：三角函数专题）" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--gold);border-radius:8px">
+      <textarea id="mcContent" placeholder="粘贴课程内容，或点击下方按钮上传文件…" style="width:100%;min-height:120px;padding:8px;border:1px solid var(--gold);border-radius:8px;font-family:inherit"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <label class="btn ghost" style="cursor:pointer">📁 选择文件<input type="file" id="mcFile" accept=".txt,.md" style="display:none" onchange="mcUpload(this)"></label>
+        <button class="btn" onclick="mcSaveCourse()">💾 保存课程</button>
+        <button class="btn ghost" onclick="mcToggleForm()">取消</button>
+      </div>
+    </div>
+    ${(a.length?`<div style="margin-top:12px">`+a.map((c,i)=>`<div class="card" style="margin-top:8px"><div style="display:flex;justify-content:space-between"><b>📘 ${esc(c.title)}</b><button class="btn ghost" onclick="mcDelete(${i})">🗑️</button></div><p class="muted" style="font-size:12px">${c.date}</p><pre class="pre-wrap">${esc(c.content)}</pre></div>`).join("")+`</div>`:'<p class="muted" style="margin-top:10px">还没有上传的课程，点击「➕ 上传课程」添加你的笔记或讲义。</p>')}
+  </div>`;
+  return html;
+}
+function mcToggleForm(){ const f=$("#mcForm"); f.style.display = f.style.display==="none"?"block":"none"; }
+function mcUpload(input){
+  const f = input.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = e => { $("#mcContent").value = e.target.result; if(!$("#mcTitle").value) $("#mcTitle").value = f.name.replace(/\.[^.]+$/,""); };
+  r.readAsText(f);
+}
+function mcSaveCourse(){
+  const title = $("#mcTitle").value.trim(), content = $("#mcContent").value.trim();
+  if(!title||!content){ alert("请填写标题和内容"); return; }
+  const a = mcLoad(); a.push({title, content, date: new Date().toISOString().slice(0,10)}); mcSave(a);
+  $("#mcTitle").value=""; $("#mcContent").value=""; mcToggleForm();
+  go("math");
+}
+function mcDelete(i){ const a=mcLoad(); a.splice(i,1); mcSave(a); go("math"); }
 
 /* ---------- 音乐 ---------- */
 function renderMusic(){

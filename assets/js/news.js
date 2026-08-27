@@ -1,31 +1,27 @@
 // ====== 新闻 RSS 加载（带 CORS 代理与离线缓存） ======
 window.RSS_FEEDS = {
   politics: { label: "🏛️ 政治", feeds: [
-    "https://www.chinanews.com.cn/rss/News.xml",
-    "https://www.xinhuanet.com/politics/news_politics.xml",
+    "http://www.xinhuanet.com/politics/news_politics.xml",
     "https://www.people.com.cn/rss/politics.xml",
   ]},
   economy: { label: "💰 经济", feeds: [
+    "http://www.xinhuanet.com/fortune/news_finance.xml",
     "https://www.36kr.com/feed",
-    "https://www.cls.cn/rss",
-    "https://www.caixin.com/",
   ]},
   culture: { label: "🎭 文化", feeds: [
-    "http://www.people.com.cn/rss/wh.xml",
-    "https://www.chinanews.com.cn/rss/News.xml",
+    "http://www.chinanews.com.cn/rss/culture.xml",
+    "http://www.xinhuanet.com/politics/news_politics.xml",
   ]},
   ent: { label: "🎬 娱乐圈", feeds: [
-    "http://ent.sina.com.cn/rss/ent.xml",
-    "https://www.chinanews.com.cn/rss/News.xml",
+    "http://www.chinanews.com.cn/rss/ent.xml",
   ]},
   tech: { label: "🤖 科技AI", feeds: [
-    "https://www.jiqizhixin.com/rss",
-    "https://36kr.com/feed",
-    "https://www.zhihu.com/rss",
+    "http://www.xinhuanet.com/tech/news_tech.xml",
+    "https://www.36kr.com/feed",
   ]},
 };
 
-const RSS2JSON = "https://api.rss2json.com/v1/api.json?count=12&rss_url=";
+const RSS2JSON = "https://api.rss2json.com/v1/api.json?rss_url=";
 const ALLORIGINS = "https://api.allorigins.win/raw?url=";
 
 function stripHtml(s){ return (s||"").replace(/<[^>]+>/g,"").replace(/&[a-z]+;/g," ").replace(/\s+/g," ").trim(); }

@@ -165,6 +165,10 @@ details.collapsible[open] { box-shadow: var(--shadow); }
 
 /* 收藏/灵感卡片 */
 .chip { display: inline-block; background: var(--gold); color: var(--text-dark); border-radius: 8px; padding: 2px 8px; font-size: 12px; margin: 2px; }
+.flashcard { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: var(--text-dark); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer; min-height: 120px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(139,105,20,.25); user-select: none; }
+.flashcard:hover { filter: brightness(1.05); }
+.pre-wrap { white-space: pre-wrap; background: #fffdf6; border: 1px solid #f0e2b8; border-radius: 10px; padding: 10px; font-family: inherit; line-height: 1.7; }
+.ans { color: var(--red-dark); font-weight: 600; margin-top: 8px; }
 .bm-card { display: flex; gap: 12px; align-items: flex-start; }
 .bm-thumb { width: 90px; height: 64px; object-fit: cover; border-radius: 10px; background: #eee; flex: 0 0 auto; }
 .bm-thumb.emoji { display: flex; align-items: center; justify-content: center; font-size: 40px; }

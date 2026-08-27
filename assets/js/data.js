@@ -121,6 +121,29 @@ window.APP_DATA = {
       connectors: ["Moreover 此外","Nevertheless 尽管如此","Therefore 因此","In conclusion 总之","On the contrary 相反","Firstly/Secondly 首先/其次","Whereas 然而","Consequently 结果","In addition 另外","Particularly 尤其"],
       criteria: "📝 评分四维度：Task Response（任务回应）、Coherence & Cohesion（连贯衔接）、Lexical Resource（词汇）、Grammatical Range（语法）。小作文 150 词，大作文  `250 词。",
     },
+    // ===== 配套练习题（真实雅思题型，答案见“查看答案”）=====
+    practice: {
+      listening: [
+        { q: "🎧 听后填空（材料：学生预订暑期宿舍）\n“The single room is £120 per week, and you need to pay a deposit of two weeks’ rent, so that’s £240. Check-in is on the 5th of July.”\n① 周租金 £____ ② 押金 £____ ③ 入住日期 ____", a: "① 120　② 240　③ 5th of July（7月5日）" },
+        { q: "🎧 选择题：Section 2 介绍博物馆。 speaker 说 the museum is closed on ____.\nA. Monday　B. Tuesday　C. Wednesday", a: "B. Tuesday（常见陷阱：原文说 open daily except Tuesday）" },
+        { q: "🎧 地图题：入口在 north gate，咖啡厅在入口的 ____ 方向。", a: "opposite / 正对面（方位词 opposite / next to / behind 为高频考点）" },
+      ],
+      speaking: [
+        { q: "🗣️ Part 1：Do you prefer to study in the morning or evening? 请给出 30 秒回答要点。", a: "要点：明确偏好 + 理由（精力/安静）+ 例子。示例：I prefer mornings because my mind is freshest then; I can focus better and avoid distractions in the evening." },
+        { q: "🗣️ Part 2 卡片：Describe a book that influenced you. 列出 4 个展开点。", a: "1) 书名与类型 2) 何时读到 3) 内容大意 4) 为何影响你（观点/行为改变）。保持 1.5–2 分钟。" },
+        { q: "🗣️ Part 3：Why do some people dislike reading? 请给出讨论式回答框架。", a: "框架：承认现象 → 原因（时间/屏幕替代/教育）→ 反面价值 → 个人看法。可用连接词 Furthermore / However / In my view。" },
+      ],
+      reading: [
+        { q: "📖 判断题：原文“Most students preferred online learning.”，题目“All students preferred online learning.” 答案？", a: "FALSE（most ≠ all，属于偷换数量）" },
+        { q: "📖 填空题：The research was conducted in ____ countries across three continents. （空格限一词）", a: "答案需回原文定位名词/数字，注意词性；常见填法如 “five / several / 12”。" },
+        { q: "📖 段落匹配：如何快速锁定 heading？", a: "读段落首句+尾句抓主旨；注意转折词（but/however）后的核心句；排除过于细节或重复的选项。" },
+      ],
+      writing: [
+        { q: "✍️ 大作文真题风格：Some people think governments should invest more in public transport than in roads. To what extent do you agree? 给出四段式提纲。", a: "Intro：改写题目+立场（同意为主）。Body1：公共交通减缓拥堵与污染。Body2：道路投资边际效益低+让步（必要维护）。Conclusion：重申优先公共交通。" },
+        { q: "✍️ 小作文：柱状体显示 2010–2020 三国可再生能源占比。首句如何写？", a: "The bar chart compares the proportion of renewable energy in Country A, B and C from C 2010 to 2020. Overall, ...（先总括最大/最小/趋势）。" },
+        { q: "✍️ 评分自查：你的作文是否满足 Task Response？", a: "检查：是否回答全部问题、立场清晰、有理由与例子、不偏题。缺例子是大忌。" },
+      ],
+    },
   },
 
   // ===== 数学 =====
