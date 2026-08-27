@@ -333,39 +333,123 @@ function renderMath(){
 
 /* ---------- 数学·我的上传课程 ---------- */
 function mcLoad(){ try { return JSON.parse(localStorage.getItem("wb_math_courses")||"[]"); } catch(e){ return []; } }
-function mcSave(a){ localStorage.setItem("wb_math_courses", JSON.stringify(a)); }
+function mcSave(a){
+  try { localStorage.setItem("wb_math_courses", JSON.stringify(a)); return true; }
+  catch(e){
+    // 配额超限：尝试去掉所有原文件 blob 后重试
+    try {
+      const slim = a.map(c => c.blob ? { ...c, blob: null } : c);
+      localStorage.setItem("wb_math_courses", JSON.stringify(slim));
+      alert("本地空间不足，已为你保留文字内容，但原文件未保存（可在设置中导出备份）。");
+      return true;
+    } catch(e2){ alert("保存失败：本地存储空间已满，请先删除部分课程或清理收藏。"); return false; }
+  }
+}
 function renderMathUser(){
   const a = mcLoad();
+  const badge = t => t==="docx"?'<span class="chip" style="background:#2b579a;color:#fff">📄 Word</span>'
+    : t==="pdf"?'<span class="chip" style="background:#c0392b;color:#fff">📕 PDF</span>'
+    : '<span class="chip">📝 文本</span>';
   let html = `<div class="card" style="border:2px dashed var(--gold)">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <h3>📤 我的课程（可上传 txt/md）</h3>
+      <h3>📤 我的课程（可上传 txt / md / Word / PDF）</h3>
       <button class="btn" onclick="mcToggleForm()">➕ 上传课程</button>
     </div>
     <div id="mcForm" style="display:none;margin-top:10px">
       <input id="mcTitle" placeholder="课程标题（如：三角函数专题）" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--gold);border-radius:8px">
-      <textarea id="mcContent" placeholder="粘贴课程内容，或点击下方按钮上传文件…" style="width:100%;min-height:120px;padding:8px;border:1px solid var(--gold);border-radius:8px;font-family:inherit"></textarea>
-      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-        <label class="btn ghost" style="cursor:pointer">📁 选择文件<input type="file" id="mcFile" accept=".txt,.md" style="display:none" onchange="mcUpload(this)"></label>
+      <textarea id="mcContent" placeholder="粘贴课程内容，或点击下方按钮上传文件（txt / md / Word / PDF 会自动提取文字）…" style="width:100%;min-height:120px;padding:8px;border:1px solid var(--gold);border-radius:8px;font-family:inherit"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center">
+        <label class="btn ghost" style="cursor:pointer">📁 选择文件<input type="file" id="mcFile" accept=".txt,.md,.docx,.pdf" style="display:none" onchange="mcUpload(this)"></label>
+        <span id="mcUploadStatus" class="muted" style="font-size:12px"></span>
         <button class="btn" onclick="mcSaveCourse()">💾 保存课程</button>
         <button class="btn ghost" onclick="mcToggleForm()">取消</button>
       </div>
     </div>
-    ${(a.length?`<div style="margin-top:12px">`+a.map((c,i)=>`<div class="card" style="margin-top:8px"><div style="display:flex;justify-content:space-between"><b>📘 ${esc(c.title)}</b><button class="btn ghost" onclick="mcDelete(${i})">🗑️</button></div><p class="muted" style="font-size:12px">${c.date}</p><pre class="pre-wrap">${esc(c.content)}</pre></div>`).join("")+`</div>`:'<p class="muted" style="margin-top:10px">还没有上传的课程，点击「➕ 上传课程」添加你的笔记或讲义。</p>')}
+    ${(a.length?`<div style="margin-top:12px">`+a.map((c,i)=>`<div class="card" style="margin-top:8px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b>📘 ${esc(c.title)}</b> ${badge(c.type)}</div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px"><p class="muted" style="font-size:12px;margin:0">${c.date}</p>${c.blob?`<a class="btn ghost" style="font-size:12px;padding:4px 8px" href="${c.blob}" download="${esc(c.title)}.${c.type==='docx'?'docx':'pdf'}">⬇️ 原文件</a>`:""}</div><pre class="pre-wrap">${esc(c.content)}</pre><div style="text-align:right"><button class="btn ghost" onclick="mcDelete(${i})">🗑️ 删除</button></div></div>`).join("")+`</div>`:'<p class="muted" style="margin-top:10px">还没有上传的课程，点击「➕ 上传课程」添加你的笔记或讲义。</p>')}
   </div>`;
   return html;
 }
 function mcToggleForm(){ const f=$("#mcForm"); f.style.display = f.style.display==="none"?"block":"none"; }
+/* 配置 pdf.js worker（兼容子路径部署） */
+function mcEnsurePdfWorker(){ if(window.pdfjsLib && !pdfjsLib.GlobalWorkerOptions.workerSrc){ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL("assets/js/vendor/pdf.worker.min.js", location.href).href; } }
+/* 从 Word(docx) 提取纯文本 */
+async function mcExtractDocx(file){
+  if(!window.mammoth) throw new Error("mammoth 未加载");
+  const ab = await file.arrayBuffer();
+  const res = await mammoth.extractRawText({ arrayBuffer: ab });
+  return res.value || "";
+}
+/* 从 PDF 提取纯文本 */
+async function mcExtractPdf(file){
+  mcEnsurePdfWorker();
+  if(!window.pdfjsLib) throw new Error("pdf.js 未加载");
+  const data = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data }).promise;
+  let txt = "";
+  for(let p=1; p<=pdf.numPages; p++){
+    const page = await pdf.getPage(p);
+    const content = await page.getTextContent();
+    txt += content.items.map(it=>it.str).join(" ") + "\n\n";
+  }
+  return txt.trim();
+}
 function mcUpload(input){
   const f = input.files[0]; if(!f) return;
+  const ext = (f.name.split(".").pop()||"").toLowerCase();
+  const status = $("#mcUploadStatus");
+  const setStatus = s => { if(status) status.textContent = s||""; };
+  const done = (text, type, blob) => {
+    $("#mcContent").value = text;
+    if(!$("#mcTitle").value) $("#mcTitle").value = f.name.replace(/\.[^.]+$/,"");
+    window.__mcCur = { type, blob };
+    setStatus("✅ 已读取：" + f.name);
+  };
+  if(ext==="txt"||ext==="md"){
+    const r = new FileReader();
+    r.onload = e => done(e.target.result, "txt");
+    r.readAsText(f);
+    return;
+  }
+  if(ext==="docx"){
+    setStatus("⏳ 正在解析 Word…");
+    if(f.size > 4*1024*1024){ // 超过 4MB 不保留原文件，仅存文本
+      mcExtractDocx(f).then(t=>done(t||"", "docx", null)).catch(e=>setStatus("❌ 解析失败："+e.message));
+    } else {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const blob = e.target.result; // dataURL
+        mcExtractDocx(f).then(t=>done(t||"", "docx", blob)).catch(e=>setStatus("❌ 解析失败："+e.message));
+      };
+      reader.readAsDataURL(f);
+    }
+    return;
+  }
+  if(ext==="pdf"){
+    setStatus("⏳ 正在解析 PDF…");
+    if(f.size > 4*1024*1024){
+      mcExtractPdf(f).then(t=>done(t||"", "pdf", null)).catch(e=>setStatus("❌ 解析失败："+e.message));
+    } else {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const blob = e.target.result;
+        mcExtractPdf(f).then(t=>done(t||"", "pdf", blob)).catch(e=>setStatus("❌ 解析失败："+e.message));
+      };
+      reader.readAsDataURL(f);
+    }
+    return;
+  }
+  setStatus("⚠️ 不支持的文件类型，已尝试按纯文本读取");
   const r = new FileReader();
-  r.onload = e => { $("#mcContent").value = e.target.result; if(!$("#mcTitle").value) $("#mcTitle").value = f.name.replace(/\.[^.]+$/,""); };
+  r.onload = e => done(e.target.result, "txt");
   r.readAsText(f);
 }
 function mcSaveCourse(){
   const title = $("#mcTitle").value.trim(), content = $("#mcContent").value.trim();
   if(!title||!content){ alert("请填写标题和内容"); return; }
-  const a = mcLoad(); a.push({title, content, date: new Date().toISOString().slice(0,10)}); mcSave(a);
-  $("#mcTitle").value=""; $("#mcContent").value=""; mcToggleForm();
+  const cur = window.__mcCur || {};
+  const a = mcLoad(); a.push({title, content, date: new Date().toISOString().slice(0,10), type: cur.type||"txt", blob: cur.blob||null}); mcSave(a);
+  window.__mcCur = null;
+  $("#mcTitle").value=""; $("#mcContent").value=""; if($("#mcUploadStatus")) $("#mcUploadStatus").textContent=""; mcToggleForm();
   go("math");
 }
 function mcDelete(i){ const a=mcLoad(); a.splice(i,1); mcSave(a); go("math"); }

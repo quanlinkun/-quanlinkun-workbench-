@@ -1,4 +1,4 @@
-const CACHE = "quanlinkun-v1";
+const CACHE = "quanlinkun-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -7,6 +7,10 @@ const ASSETS = [
   "./assets/js/data.js",
   "./assets/js/news.js",
   "./assets/js/app.js",
+  "./assets/js/ielts.js",
+  "./assets/js/vendor/mammoth.browser.min.js",
+  "./assets/js/vendor/pdf.min.js",
+  "./assets/js/vendor/pdf.worker.min.js",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png"
 ];
