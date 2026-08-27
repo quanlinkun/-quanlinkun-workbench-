@@ -142,12 +142,16 @@ async function loadNews(cat, force){
   const box = $("#newsList");
   box.innerHTML = '<p class="muted">⏳ 加载中…</p>';
   try {
-    const items = await getNews(cat);
-    if (!items || !items.length) throw new Error("empty");
-    box.innerHTML = items.map(it => `
+    const r = await getNews(cat, force);
+    if (!r.items || !r.items.length) throw new Error("empty");
+    const stamp = r.cached
+      ? "📦 缓存于 " + new Date(r.fetchedAt).toLocaleString("zh-CN", {hour:"2-digit",minute:"2-digit"})
+      : "🟢 实时更新";
+    const head = `<div class="news-stamp">${RSS_FEEDS[cat].label} · ${stamp} · 共 ${r.items.length} 条<br><span class="muted">每日自动刷新，缓存 20 分钟</span></div>`;
+    box.innerHTML = head + r.items.map(it => `
       <div class="news-item">
-        <a href="${esc(it.link)}" target="_blank" rel="noopener">${RSS_FEEDS[cat].label} ${esc(it.title)}</a>
-        <div class="news-meta">🕒 ${esc((it.date||'').slice(0,16))} · ${esc(it.desc.slice(0,80))}</div>
+        <a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.title)}</a>
+        <div class="news-meta">🕒 ${esc(timeAgo(it.date))}${it.date? " · " + esc(String(it.date).slice(0,16)) : ""} · ${esc(it.desc.slice(0,80))}</div>
       </div>`).join("");
   } catch(e){
     box.innerHTML = `<p class="muted">⚠️ 新闻加载失败（可能网络受限或 RSS 源不可用）。已尝试代理仍失败，请点击🔄重试或检查网络。</p>`;
