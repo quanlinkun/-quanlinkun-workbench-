@@ -4,13 +4,14 @@
 
 ## 方式一：GitHub Pages（推荐）
 
-1. 在 https://github.com/new 创建一个仓库（例如 `quanlinkun-workbench`），**不要**勾选 README。
+1. 在 <https://github.com/new> 创建一个仓库（例如 `quanlinkun-workbench`），**不要**勾选 README。
 2. 在本目录执行（替换 `<你的用户名>`）：
    ```bash
-   git remote add origin https://github.com/<你的用户名>/quanlinkun-workbench.git
+   git remote add origin https://github.com/<quanlinkun>/quanlinkun-workbench.git
    git branch -M main
    git push -u origin main
    ```
+
 3. 打开仓库 **Settings → Pages**，Source 选择 `Deploy from a branch`，Branch 选 `main`、目录 `/(root)`，保存。
 4. 等待 1-2 分钟，访问：`https://<你的用户名>.github.io/quanlinkun-workbench/`
 
