@@ -1,6 +1,18 @@
 // ====== 新闻 RSS 加载（带 CORS 代理、按时间排序、缓存过期） ======
 // 说明：许多传统中文 RSS（新华网/人民网）已停更或返回陈旧内容，
 // 目前稳定且实时的源为中国新闻网「滚动新闻」与 36氪。
+// 缓存版本控制：升级后自动清理旧版（旧源失效链接）缓存
+const NEWS_CACHE_VER = "v2";
+(function clearOldNewsCache(){
+  try{
+    for(let i = localStorage.length - 1; i >= 0; i--){
+      const k = localStorage.key(i);
+      if(k && k.indexOf("wb_news_") === 0 && k.indexOf("wb_news_" + NEWS_CACHE_VER + "_") !== 0){
+        localStorage.removeItem(k);
+      }
+    }
+  }catch(_){}
+})();
 window.RSS_FEEDS = {
   politics: { label: "🏛️ 政治", feeds: [
     "http://www.chinanews.com.cn/rss/scroll-news.xml",
@@ -85,7 +97,7 @@ async function loadFeed(feeds){
 
 // 返回 { items(按发布时间倒序), source, cached, fetchedAt }
 async function getNews(c, force){
-  const cacheKey = "wb_news_" + c;
+  const cacheKey = "wb_news_" + NEWS_CACHE_VER + "_" + c;
   try {
     let cachedObj = null;
     const cached = localStorage.getItem(cacheKey);

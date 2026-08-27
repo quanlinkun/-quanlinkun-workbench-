@@ -148,11 +148,16 @@ async function loadNews(cat, force){
       ? "📦 缓存于 " + new Date(r.fetchedAt).toLocaleString("zh-CN", {hour:"2-digit",minute:"2-digit"})
       : "🟢 实时更新";
     const head = `<div class="news-stamp">${RSS_FEEDS[cat].label} · ${stamp} · 共 ${r.items.length} 条<br><span class="muted">每日自动刷新，缓存 20 分钟</span></div>`;
-    box.innerHTML = head + r.items.map(it => `
+    box.innerHTML = head + r.items.map(it => {
+      const okLink = /^https?:\/\//.test(it.link || "");
+      const href = okLink ? it.link : "https://www.baidu.com/s?wd=" + encodeURIComponent(it.title);
+      const fix = okLink ? "" : ' <span class="news-fallback">🔍 原文链接已失效，已改为搜索</span>';
+      return `
       <div class="news-item">
-        <a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.title)}</a>
+        <a href="${esc(href)}" target="_blank" rel="noopener">${esc(it.title)}</a>${fix}
         <div class="news-meta">🕒 ${esc(timeAgo(it.date))}${it.date? " · " + esc(String(it.date).slice(0,16)) : ""} · ${esc(it.desc.slice(0,80))}</div>
-      </div>`).join("");
+      </div>`;
+    }).join("");
   } catch(e){
     box.innerHTML = `<p class="muted">⚠️ 新闻加载失败（可能网络受限或 RSS 源不可用）。已尝试代理仍失败，请点击🔄重试或检查网络。</p>`;
   }
