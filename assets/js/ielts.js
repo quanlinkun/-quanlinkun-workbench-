@@ -287,8 +287,27 @@ const IE_CONTENT = {
   ],
 };
 
+/* ============ 每日真题 feed（网络近期考题，每日自动化刷新） ============ */
+let IE_FEED = null;
+let IE_FEED_DATE = null;
+const IE_FEED_KEYS = ["readingPassage","listeningSets","speaking","dailyDialogue","dailySentence","writing"];
+async function ieLoadFeed(){
+  try {
+    const r = await fetch("assets/data/ielts-feed.json?t=" + Date.now(), { cache: "no-store" });
+    if (r.ok){
+      const f = await r.json();
+      if (f && f.meta && f.meta.date){
+        IE_FEED_DATE = f.meta.date;
+        IE_FEED_KEYS.forEach(k=>{ if (f[k] !== undefined) IE_CONTENT[k] = f[k]; });
+        IE_FEED = f;
+      }
+    }
+  } catch(_){ /* 离线 / 本地 file:// 打开：自动回退到内置静态题 */ }
+}
+
 /* ============ 主渲染：重写 renderIelts ============ */
-function renderIelts(){
+async function renderIelts(){
+  await ieLoadFeed();
   const c = document.createElement("div");
   c.className = "page";
   c.innerHTML =
@@ -377,7 +396,10 @@ function ieDash(){
   const wk = ieLastNDurations(7);
   const chart = '<div class="card" style="margin-top:16px"><h3>📈 近 7 日学习时长趋势（小时）</h3>'+ieLineChart(wk.arr, wk.labs, "#E63946")+
     '<p class="muted">本周累计 '+ieWeekTime()+' 小时 · 本月打卡 '+ieMonthCheckins()+' 天</p></div>';
-  return '<div class="grid grid-cols-4" style="margin-bottom:4px">'+ov+'</div>'+planBar+chart+
+  const feedBadge = IE_FEED_DATE
+    ? '<div class="card" style="margin-top:16px;background:#f3f7e8;border-left:3px solid #2e7d32"><h3>🌐 今日真题已联网更新</h3><p class="muted">题库日期：'+IE_FEED_DATE+' · 来源：网络近期雅思考题（阅读/听力/口语/写作）。每日自动化刷新；若离线或加载失败，自动回退到内置静态题库。</p></div>'
+    : '';
+  return '<div class="grid grid-cols-4" style="margin-bottom:4px">'+ov+'</div>'+planBar+chart+feedBadge+
     '<div class="card" style="margin-top:16px"><h3>🧭 模式与难度</h3>'+
     '<p class="muted">当前：'+(p.mode==="exam"?"🎯 雅思应试备考模式":"💬 日常英文对话模式")+' · 难度 '+p.difficulty+' 分。'+
     '可点击右上角按钮切换，或输入指令【切换应试模式】【切换日常对话模式】【难度调到 7 分】。</p>'+
@@ -529,6 +551,28 @@ function ieWords(){
     '<div class="row"><div class="card" style="flex:1"><h4>📘 书面学术</h4><p class="muted">utilise, demonstrate, nevertheless, a substantial amount of</p></div>'+
     '<div class="card" style="flex:1"><h4>💬 日常口语</h4><p class="muted">use, show, but, a lot of, kinda, wanna</p></div></div>'+
     '<p class="muted">区分要点：学术写作重精确与正式；口语重自然流畅，可用缩略与口语化表达。</p></div>';
+  if (IE_CONTENT.writing){
+    const w = IE_CONTENT.writing;
+    let wc = '<div class="card"><h3>📝 今日写作真题（网络近期考题）</h3>';
+    if (w.task2 && w.task2.length){
+      wc += '<p class="muted">Task 2 议论文</p>';
+      w.task2.forEach(t=>{
+        wc += '<div class="qbox"><div class="qhead"><span class="qtag">真题</span> '+esc(t.prompt)+'</div>'+
+          '<details class="collapsible"><summary>📐 四段式提纲</summary><p class="pre-wrap">'+esc(t.outline)+'</p>'+
+          (t.source?'<p class="muted">来源：'+esc(t.source)+'</p>':'')+'</details></div>';
+      });
+    }
+    if (w.task1 && w.task1.length){
+      wc += '<p class="muted" style="margin-top:8px">Task 1 图表</p>';
+      w.task1.forEach(t=>{
+        wc += '<div class="qbox"><div class="qhead"><span class="qtag">真题</span> '+esc(t.prompt)+'</div>'+
+          '<details class="collapsible"><summary>📐 写作要点</summary><p class="pre-wrap">'+esc(t.outline)+'</p>'+
+          (t.source?'<p class="muted">来源：'+esc(t.source)+'</p>':'')+'</details></div>';
+      });
+    }
+    wc += '<p class="muted">提示：限时 40 分钟（Task2）/ 20 分钟（Task1）完成，写完用「逐题精讲」思路自检。</p></div>';
+    h += wc;
+  }
   return h;
 }
 function ieQuiz(){

@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "date": "2026-08-27",
+    "generated": "2026-08-27T22:05:00+08:00",
+    "note": "本文件由每日自动化从网络近期雅思考题话题（2026 真实考题）生成，覆盖阅读/听力/口语/写作/每日精读。应用启动优先读取本文件；若加载失败自动回退到内置静态题库。",
+    "sources": [
+      "allthingsielts.com/recent-exam-questions.php",
+      "ieltsupdatesandrecentexams.com",
+      "examword.com/ielts-practice/writing-exam-academic",
+      "simplyielts.com/ielts-speaking-topics",
+      "talkdrill.com/blog/exams/ielts-speaking/ielts-speaking-topics-2026"
+    ]
+  },
+  "readingPassage": {
+    "title": "Urban Vertical Farming: Feeding Cities Indoors (A 类学术·近期话题)",
+    "text": "Urban vertical farming — the practice of growing crops in stacked layers within controlled indoor environments — has moved from niche experiment to a serious candidate for feeding cities. Proponents argue that by using LED lighting and precise hydroponic systems, a single warehouse can produce the equivalent of several hectares of traditional farmland while using up to 95% less water. In regions where arable land is scarce or transport costs are high, this efficiency is compelling.\n\nHowever, critics point to the energy bill. Artificial lighting and climate control consume significant electricity, and unless that power comes from renewables, the carbon footprint can exceed that of conventional agriculture. A 2023 lifecycle study in the Netherlands found that vertically farmed lettuce emitted more CO2 per kilogram than field-grown lettuce when the grid relied on fossil fuels.\n\nEconomically, the model remains fragile. High setup costs and the need for skilled operators mean most vertical farms still depend on subsidies or premium pricing. Yet advocates counter that as renewable energy cheapens and automation improves, the balance will shift. Several Asian cities already integrate vertical farms into residential towers, suggesting a possible template for dense urban futures.",
+    "qs": [
+      { "type": "判断", "q": "Vertical farming uses MORE water than traditional farming.", "answer": "FALSE",
+        "loc": "using up to 95% less water",
+        "para": "more water ↔ 原文 95% less water（反义替换，注意比较方向）。",
+        "trap": "题干把 less 偷换成 more，典型反向陷阱。",
+        "explain": "原文明确说少用 95% 水，题干说用更多，故 FALSE。" },
+      { "type": "填空", "q": "A single warehouse can equal several hectares of ______ farmland.", "answer": "traditional",
+        "loc": "equivalent of several hectares of traditional farmland",
+        "para": "equal ↔ equivalent；farmland 原词复现。",
+        "trap": "空后 farmland 为原词，定位后 traditional 即答案。",
+        "explain": "填 traditional。" },
+      { "type": "选择", "q": "According to the 2023 Dutch study, vertically farmed lettuce had a higher ______ than field-grown.", "options": [{"v":"A","t":"water use"},{"v":"B","t":"carbon footprint"},{"v":"C","t":"production cost"}], "answer": "B",
+        "loc": "emitted more CO2 per kilogram than field-grown lettuce when the grid relied on fossil fuels",
+        "para": "higher ↔ more CO2；carbon footprint ↔ CO2 emissions。",
+        "trap": "研究对比的是碳排放，不是用水或成本。",
+        "explain": "选 B。" },
+      { "type": "匹配", "q": "Which heading best fits Paragraph 3?", "options": [{"v":"A","t":"Economic challenges and future outlook"},{"v":"B","t":"Environmental benefits"},{"v":"C","t":"Technological details"}], "answer": "A",
+        "loc": "Economically, the model remains fragile ... the balance will shift.",
+        "para": "economically / future ↔ heading A。",
+        "trap": "第三段核心是经济脆弱性与未来展望，B 是第二段，C 未提及。",
+        "explain": "选 A。" },
+      { "type": "选择", "q": "Why do most vertical farms still depend on subsidies?", "options": [{"v":"A","t":"Lack of consumer demand"},{"v":"B","t":"High setup costs and need for skilled operators"},{"v":"C","t":"Poor crop yields"}], "answer": "B",
+        "loc": "High setup costs and the need for skilled operators mean most vertical farms still depend on subsidies",
+        "para": "depend on subsidies ↔ High setup costs and skilled operators。",
+        "trap": "定位 depend on subsidies 一句，直接对应 B。",
+        "explain": "选 B。" }
+    ]
+  },
+  "listeningSets": [
+    { "module": "listening", "title": "Section 2 · 生活资讯（博物馆特展导览）",
+      "transcript": "Welcome to the Riverside Museum. Our temporary exhibition, Timeless Textiles, runs until the 30th of September. Entry is free for members; for non-members, tickets are 8 pounds for adults and 5 pounds for children. The exhibition opens at 10 a.m. and the last admission is at 4.30 p.m. Guided tours leave from the main hall at 11 a.m. and 2 p.m. daily. Please note that photography is not permitted in the final gallery.",
+      "qs": [
+        { "type": "填空", "q": "The exhibition ends on the ______ of September.", "answer": "30th",
+          "loc": "runs until the 30th of September", "para": "ends ↔ runs until。", "trap": "序数词 30th 拼写易错，注意 th。", "explain": "填 30th。" },
+        { "type": "填空", "q": "Adult ticket price: ______ pounds.", "answer": "8",
+          "loc": "tickets are 8 pounds for adults", "para": "adult ↔ adults。", "trap": "区分成人 8 与儿童 5。", "explain": "填 8。" },
+        { "type": "填空", "q": "Last admission: ______ p.m.", "answer": "4.30",
+          "loc": "the last admission is at 4.30 p.m.", "para": "last admission ↔ 4.30 p.m.。", "trap": "时间考点，4.30 易误听为 fourteen thirty 后写错。", "explain": "填 4.30。" },
+        { "type": "选择", "q": "When do guided tours depart?", "options": [{"v":"A","t":"10 a.m. and 2 p.m."},{"v":"B","t":"11 a.m. and 2 p.m."},{"v":"C","t":"11 a.m. and 4 p.m."}], "answer": "B",
+          "loc": "Guided tours leave ... at 11 a.m. and 2 p.m. daily", "para": "tours depart ↔ leave。", "trap": "开场 10 a.m. 是开馆时间，易误选 A。", "explain": "选 B。" },
+        { "type": "判断", "q": "Photography is allowed in all galleries.", "answer": "FALSE",
+          "loc": "photography is not permitted in the final gallery", "para": "all galleries ↔ not permitted in the final gallery。", "trap": "final gallery 禁止，故并非全部允许。", "explain": "选 FALSE。" }
+      ] },
+    { "module": "listening", "title": "Section 2 · 社区信息（社区花园）",
+      "transcript": "The Green Lane Community Garden was established in 2015. Today it has 40 plots available to local residents for an annual fee of 30 pounds. Water is provided free of charge. The garden is open from dawn to dusk. New members must attend a short orientation session held on the first Saturday of each month at 9 a.m.",
+      "qs": [
+        { "type": "填空", "q": "The garden was established in ______.", "answer": "2015",
+          "loc": "established in 2015", "para": "established ↔ established。", "trap": "年份考点，注意 2015 与 2016 区分。", "explain": "填 2015。" },
+        { "type": "填空", "q": "Number of plots available: ______.", "answer": "40",
+          "loc": "has 40 plots available", "para": "number of plots ↔ 40 plots。", "trap": "数字 40，注意与 14 区分。", "explain": "填 40。" },
+        { "type": "填空", "q": "Annual fee: ______ pounds.", "answer": "30",
+          "loc": "annual fee of 30 pounds", "para": "annual fee ↔ 30 pounds。", "trap": "区分年费 30 与可能的月费。", "explain": "填 30。" },
+        { "type": "填空", "q": "Orientation is on the first ______ of each month.", "answer": "Saturday",
+          "loc": "first Saturday of each month", "para": "first ______ ↔ first Saturday。", "trap": "Saturday 拼写较长，注意 -day 结尾。", "explain": "填 Saturday。" },
+        { "type": "判断", "q": "Water is free of charge for members.", "answer": "TRUE",
+          "loc": "Water is provided free of charge", "para": "free ↔ free of charge。", "trap": "直接同义复现。", "explain": "选 TRUE。" }
+      ] }
+  ],
+  "speaking": {
+    "part1": [
+      { "topic": "AI tools（2026 新题）", "q": "Do you use any AI tools in your daily life? How have they changed the way you study or work?",
+        "tip": "Band 7+ 思路：给具体场景，如 summarising articles / drafting emails，别说只会说 very useful。例：I use AI to summarise long articles, which saves me a lot of time before meetings." },
+      { "topic": "Social media content（2026 新题）", "q": "Do you create any content online? What type of videos or posts do you usually watch?",
+        "tip": "区分创作与消费；可谈 short videos / tutorials，并说明频率。" },
+      { "topic": "Morning routine（2026 新题）", "q": "Are you a morning person or a night person? Describe your typical morning routine.",
+        "tip": "用时间顺序展开 2-3 句，体现连贯与时态准确。" }
+    ],
+    "part2": [
+      { "topic": "Describe a place where you go to relax（高频）", "bullets": ["where it is","how often you go there","what you do there","why it helps you relax"],
+        "tip": "开头：The place I find most relaxing is... 用感官描写（声音/光线/气味）撑满 2 分钟。" },
+      { "topic": "Describe a person who taught you something valuable", "bullets": ["who the person is","what they taught you","how they taught it","why it was valuable"],
+        "tip": "用具体事例 + 一句引言更容易拿高分，结尾点明影响。" },
+      { "topic": "Describe a time you received unexpected good news", "bullets": ["what the news was","who told you","when it happened","how you felt"],
+        "tip": "全程过去时叙述，结尾点明情绪的前后变化。" }
+    ],
+    "part3": [
+      { "topic": "Technology and relaxation", "q": "Has technology made it easier or harder for people to relax? Why?",
+        "tip": "辩证回答：便利（冥想 App）vs 信息过载（随时在线）。" },
+      { "topic": "Learning from others", "q": "Is it better to learn skills from others or by yourself? Why?",
+        "tip": "对比两种方式优劣，给出个人倾向并举例。" },
+      { "topic": "Good news in society", "q": "Do you think the media should report more good news? Why or why not?",
+        "tip": "从公众情绪与新闻价值两个角度展开。" }
+    ]
+  },
+  "dailyDialogue": [
+    { "q": "What is something new you have tried recently?", "tip": "用现在完成时：I have recently tried..." },
+    { "q": "How do you usually spend a rainy day?", "tip": "自然口语：Honestly, I just..." },
+    { "q": "If a friend visited your city, where would you take them first?", "tip": "用 would + 地点 + 理由，虚拟语气。" }
+  ],
+  "dailySentence": [
+    "Vertical farms promise higher yields, yet their energy demands pose a sustainability paradox.",
+    "Although renewable costs have fallen, the upfront capital for automation remains prohibitive for many operators.",
+    "Not only does urban farming shorten supply chains, but it also reconnects city dwellers with food production."
+  ],
+  "writing": {
+    "task2": [
+      { "prompt": "Government funding for the arts is a waste of money when there are more pressing issues like healthcare and education. To what extent do you agree or disagree?（真实考题，2026-03-22）",
+        "outline": "Intro：改写题目 + 立场（部分同意）。Body1：医疗、教育确应优先，艺术预算常被削减。Body2：但艺术有文化与社会价值，且占比通常很小。Conclusion：应平衡分配，而非一刀切削减。",
+        "source": "allthingsielts.com" },
+      { "prompt": "Some people believe that robots are very important for the future of human development, while others believe that they are dangerous and have a negative impact on society. Discuss both views and give your opinion.（真实考题，2026-05，USA）",
+        "outline": "Intro：双方观点并重引出。Body1：机器人提升制造与医疗效率、替代危险工作。Body2：带来就业替代与伦理风险。Conclusion：在监管框架下善用，利大于弊。",
+        "source": "ieltsupdatesandrecentexams.com" }
+    ],
+    "task1": [
+      { "prompt": "The pie charts show the proportion of electricity produced by different energy sources in four countries in 2008. Summarise the main features and make comparisons where relevant.（真实 Task 1 话题，2026）",
+        "outline": "开头总述四国差异；主体按 renewable 与 non-renewable 分组对比，指出最绿色与最依赖化石的国家；结尾概括总体趋势。",
+        "source": "examword.com" }
+    ]
+  }
+}
