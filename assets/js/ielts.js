@@ -292,17 +292,27 @@ let IE_FEED = null;
 let IE_FEED_DATE = null;
 const IE_FEED_KEYS = ["readingPassage","listeningSets","speaking","dailyDialogue","dailySentence","writing"];
 async function ieLoadFeed(){
-  try {
-    const r = await fetch("assets/data/ielts-feed.json?t=" + Date.now(), { cache: "no-store" });
-    if (r.ok){
-      const f = await r.json();
-      if (f && f.meta && f.meta.date){
-        IE_FEED_DATE = f.meta.date;
-        IE_FEED_KEYS.forEach(k=>{ if (f[k] !== undefined) IE_CONTENT[k] = f[k]; });
-        IE_FEED = f;
+  const day = new Date().toISOString().slice(0,10);
+  const cands = [];
+  // 线上环境：优先读取 GitHub Pages 上的远程 feed（同源绝对地址，确保拿到最新）
+  if (location.hostname !== "127.0.0.1" && location.hostname !== "localhost")
+    cands.push("https://quanlinkun.github.io/-quanlinkun-workbench-/assets/data/ielts-feed.json?t=" + day);
+  // 本地预览 / 兜底：相对路径
+  cands.push("assets/data/ielts-feed.json?t=" + day);
+  for (const url of cands){
+    try {
+      const r = await fetch(url, { cache: "no-store" });
+      if (r.ok){
+        const f = await r.json();
+        if (f && f.meta && f.meta.date){
+          IE_FEED_DATE = f.meta.date;
+          IE_FEED_KEYS.forEach(k=>{ if (f[k] !== undefined) IE_CONTENT[k] = f[k]; });
+          IE_FEED = f;
+        }
+        break;
       }
-    }
-  } catch(_){ /* 离线 / 本地 file:// 打开：自动回退到内置静态题 */ }
+    } catch(_){ /* 该候选失败，尝试下一个 */ }
+  }
 }
 
 /* ============ 主渲染：重写 renderIelts ============ */
