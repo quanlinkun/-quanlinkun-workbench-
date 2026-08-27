@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#8B6914" />
+  <meta name="description" content="全麟坤的工作台 — 个人综合工作台，集成新闻、学习、创作、日历与收藏。" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>全麟坤的工作台</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 侧边栏 -->
+    <aside id="sidebar">
+      <div class="sidebar-head">
+        <span class="logo">👑 全麟坤的工作台</span>
+        <button id="closeSidebar" class="icon-btn close-btn" title="收起">✖️</button>
+      </div>
+      <nav id="nav" class="nav"></nav>
+      <div class="sidebar-foot">
+        <button class="nav-item" data-page="search">🔍 全局搜索</button>
+        <button class="nav-item" data-page="settings">⚙️ 设置</button>
+        <div id="syncStatus" class="sync-status"></div>
+      </div>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
+
+    <!-- 顶部栏 -->
+    <header id="topbar">
+      <button id="menuBtn" class   ="icon-btn" title="菜单">☰</button>
+      <h1 id="pageTitle">🏠 首页</h1>
+      <div id="topActions"></div>
+    </header>
+
+    <!-- 内容区 -->
+    <main id="content"></main>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/news.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
