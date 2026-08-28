@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#8B6914" />
+  <meta name="theme-color" content="#0D1B2A" />
   <meta name="description" content="全麟坤的工作台 — 个人综合工作台，集成新闻、学习、创作、日历与收藏。" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
@@ -11,6 +11,8 @@
   <title>全麟坤的工作台</title>
 </head>
 <body>
+  <canvas id="spaceCanvas"></canvas>
+
   <div id="app">
     <!-- 侧边栏 -->
     <aside id="sidebar">
@@ -39,6 +41,7 @@
     <main id="content"></main>
   </div>
 
+  <script src="assets/js/particles.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/news.js"></script>
   <script src="assets/js/vendor/mammoth.browser.min.js"></script>

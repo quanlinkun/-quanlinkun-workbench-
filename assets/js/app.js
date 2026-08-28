@@ -11,7 +11,7 @@ function applyTheme(t){
   localStorage.setItem("wb_theme", t);
 }
 function initTheme(){
-  const t = localStorage.getItem("wb_theme") || "light";
+  const t = localStorage.getItem("wb_theme") || "space";
   applyTheme(t);
 }
 
@@ -830,13 +830,22 @@ function buildSearchIndex(){
 /* ---------- 设置 ---------- */
 function renderSettings(){
   const c=document.createElement("div"); c.className="page";
-  const theme = localStorage.getItem("wb_theme")||"light";
+  const theme = localStorage.getItem("wb_theme")||"space";
+  const pOn = window.SpaceParticles ? window.SpaceParticles.isOn() : false;
   c.innerHTML = `
     <div class="card" style="margin-bottom:14px"><h3>🌗 主题</h3>
       <div class="row">
+        <button class="btn ${theme==='space'?'gold':'ghost'}" onclick="setTheme('space')">🌌 深空科技</button>
         <button class="btn ${theme==='light'?'gold':'ghost'}" onclick="setTheme('light')">🌞 金黄（浅）</button>
         <button class="btn ${theme==='dark'?'gold':'ghost'}" onclick="setTheme('dark')">🌙 深色模式</button>
       </div>
+    </div>
+    <div class="card" style="margin-bottom:14px"><h3>✨ 动态粒子</h3>
+      <div class="row">
+        <button class="btn ${pOn?'gold':'ghost'}" onclick="toggleParticles(true)">开启</button>
+        <button class="btn ${pOn?'ghost':'gold'}" onclick="toggleParticles(false)">关闭</button>
+      </div>
+      <p class="muted" style="margin-top:8px">背景粒子会跟随窗口大小自动调整密度，手机上自动减半以省电；系统在「减弱动效」模式下默认不启动。可随时开关。</p>
     </div>
     <div class="card" style="margin-bottom:14px"><h3>💾 数据管理</h3>
       <div class="row">
@@ -855,6 +864,10 @@ function renderSettings(){
   $("#content").appendChild(c);
 }
 function setTheme(t){ applyTheme(t); renderSettings(); }
+function toggleParticles(on){
+  if (window.SpaceParticles) window.SpaceParticles.setOn(on);
+  renderSettings();
+}
 function exportData(){
   const data = {
     bookmarks: loadBookmarks(), events: loadEvents(),

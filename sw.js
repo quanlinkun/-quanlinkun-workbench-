@@ -1,9 +1,10 @@
-const CACHE = "quanlinkun-v2";
+const CACHE = "quanlinkun-v3";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./assets/css/style.css",
+  "./assets/js/particles.js",
   "./assets/js/data.js",
   "./assets/js/news.js",
   "./assets/js/app.js",

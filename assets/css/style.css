@@ -11,6 +11,12 @@
   --card-border: #E6C200;
   --muted: #8a7a5c;
   --shadow: 0 4px 16px rgba(139, 105, 20, 0.12);
+  --soft-bg: #fff7d6;
+  --soft-bg-2: #fffdf6;
+  --soft-border: #f0e2b8;
+  --progress-bg: #e9dca0;
+  --particle: #B8860B;
+  --particle-rgb: 184,134,11;
 }
 
 [data-theme="dark"] {
@@ -26,6 +32,34 @@
   --card-border: #6b5410;
   --muted: #b8a982;
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --soft-bg: #4a3f1a;
+  --soft-bg-2: #3a3218;
+  --soft-border: #6b5410;
+  --progress-bg: #55491f;
+  --particle: #E6B800;
+  --particle-rgb: 230,184,0;
+}
+
+/* ===== 深空科技主题（金色星座粒子） ===== */
+[data-theme="space"] {
+  --gold: #FFD700;
+  --gold-2: #F5C518;
+  --red: #FF6B6B;
+  --red-dark: #FF8A8A;
+  --text-dark: #E6EDF8;
+  --sidebar-from: rgba(11,20,36,0.86);
+  --sidebar-to: rgba(7,13,26,0.94);
+  --content-bg: linear-gradient(160deg,#070d1a 0%,#0d1b2a 45%,#091223 100%);
+  --card-bg: rgba(18,31,54,0.72);
+  --card-border: rgba(255,215,0,0.26);
+  --muted: #93a4bf;
+  --shadow: 0 8px 28px rgba(0,0,0,0.45);
+  --soft-bg: rgba(255,215,0,0.09);
+  --soft-bg-2: rgba(255,255,255,0.05);
+  --soft-border: rgba(255,215,0,0.22);
+  --progress-bg: rgba(255,255,255,0.10);
+  --particle: #FFD700;
+  --particle-rgb: 255,215,0;
 }
 
 * { box-sizing: border-box; }
@@ -37,7 +71,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-#app { display: flex; min-height: 100vh; }
+/* 粒子画布：始终垫在最底层，不拦截鼠标 */
+#spaceCanvas {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  background: transparent;
+}
+
+#app { display: flex; min-height: 100vh; position: relative; z-index: 1; background: transparent; }
 
 /* 侧边栏 */
 #sidebar {
@@ -155,7 +199,7 @@ ul.clean li { margin: 4px 0; }
   padding: 6px; font-size: 13px; background: var(--card-bg); position: relative; cursor: pointer;
 }
 .cal-cell.today { border: 2px solid var(--red); color: var(--red); font-weight: 800; }
-.cal-cell.has { background: #fff7d6; }
+.cal-cell.has { background: var(--soft-bg); }
 .cal-cell .dot { position: absolute; top: 6px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--red); display: inline-block; }
 .cal-week { font-weight: 700; text-align: center; padding: 6px 0; color: var(--red-dark); }
 
@@ -168,10 +212,10 @@ details.collapsible[open] { box-shadow: var(--shadow); }
 .chip { display: inline-block; background: var(--gold); color: var(--text-dark); border-radius: 8px; padding: 2px 8px; font-size: 12px; margin: 2px; }
 .flashcard { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: var(--text-dark); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer; min-height: 120px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(139,105,20,.25); user-select: none; }
 .flashcard:hover { filter: brightness(1.05); }
-.pre-wrap { white-space: pre-wrap; background: #fffdf6; border: 1px solid #f0e2b8; border-radius: 10px; padding: 10px; font-family: inherit; line-height: 1.7; }
+.pre-wrap { white-space: pre-wrap; background: var(--soft-bg-2); border: 1px solid var(--soft-border); border-radius: 10px; padding: 10px; font-family: inherit; line-height: 1.7; }
 .ans { color: var(--red-dark); font-weight: 600; margin-top: 8px; }
 .bm-card { display: flex; gap: 12px; align-items: flex-start; }
-.bm-thumb { width: 90px; height: 64px; object-fit: cover; border-radius: 10px; background: #eee; flex: 0 0 auto; }
+.bm-thumb { width: 90px; height: 64px; object-fit: cover; border-radius: 10px; background: var(--soft-bg-2); flex: 0 0 auto; }
 .bm-thumb.emoji { display: flex; align-items: center; justify-content: center; font-size: 40px; }
 
 /* 编辑器 */
@@ -179,7 +223,7 @@ details.collapsible[open] { box-shadow: var(--shadow); }
 .wordcount { font-size: 13px; color: var(--muted); }
 
 /* 进度条 */
-.progress { height: 14px; background: #e9dca0; border-radius: 999px; overflow: hidden; }
+.progress { height: 14px; background: var(--progress-bg); border-radius: 999px; overflow: hidden; }
 .progress > span { display: block; height: 100%; background: var(--red); }
 
 /* 遮罩 */
@@ -212,7 +256,7 @@ details.collapsible[open] { box-shadow: var(--shadow); }
 .ov-name { font-weight: 700; margin: 4px 0 8px; }
 .ov-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); padding: 2px 0; }
 .ov-row b { color: var(--text-dark); }
-.ov-mastery { margin-top: 8px; font-size: 12px; background: #fff7d6; border-radius: 8px; padding: 4px; color: var(--red-dark); }
+.ov-mastery { margin-top: 8px; font-size: 12px; background: var(--soft-bg); border-radius: 8px; padding: 4px; color: var(--red-dark); }
 
 .qbox { border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; margin: 10px 0; background: var(--card-bg); }
 .qbox.correct { border-color: #2a7d4f; box-shadow: 0 0 0 2px rgba(42,125,79,.25); }
@@ -222,14 +266,45 @@ details.collapsible[open] { box-shadow: var(--shadow); }
 .qbody { margin-bottom: 8px; }
 .qopt { display: block; font-size: 14px; margin: 4px 0; cursor: pointer; }
 .qopt input { width: auto; margin-right: 6px; }
-.explain { margin-top: 10px; background: #fffdf6; border: 1px dashed var(--card-border); border-radius: 10px; padding: 10px 12px; font-size: 14px; line-height: 1.7; }
+.explain { margin-top: 10px; background: var(--soft-bg-2); border: 1px dashed var(--card-border); border-radius: 10px; padding: 10px 12px; font-size: 14px; line-height: 1.7; }
 .explain p { margin: 5px 0; }
 
 .ie-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .ie-table th, .ie-table td { border: 1px solid var(--card-border); padding: 8px 10px; text-align: left; }
-.ie-table th { background: #fff7d6; color: var(--red-dark); }
+.ie-table th { background: var(--soft-bg); color: var(--red-dark); }
 .ie-table input[type=checkbox] { width: 18px; height: 18px; }
 .cal-dur { position: absolute; bottom: 4px; left: 6px; font-size: 10px; color: var(--red-dark); font-weight: 700; }
+
+/* ===== 深空主题：玻璃质感与金底深色字修正 ===== */
+[data-theme="space"] #sidebar {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-right: 1px solid rgba(255,215,0,0.18);
+}
+[data-theme="space"] #topbar {
+  background: rgba(11,20,36,0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--gold);
+  border-bottom: 1px solid rgba(255,215,0,0.22);
+}
+[data-theme="space"] .card,
+[data-theme="space"] .tab,
+[data-theme="space"] .ov-card,
+[data-theme="space"] details.collapsible,
+[data-theme="space"] .qbox,
+[data-theme="space"] input,
+[data-theme="space"] textarea,
+[data-theme="space"] select {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+[data-theme="space"] .nav-item:hover { background: rgba(255,215,0,0.12); }
+[data-theme="space"] .chip,
+[data-theme="space"] .btn.gold,
+[data-theme="space"] .flashcard { color: #2b1f08; }
+[data-theme="space"] .pre-wrap,
+[data-theme="space"] .explain { border-color: var(--soft-border); }
 
 @media (max-width: 760px){
   .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
