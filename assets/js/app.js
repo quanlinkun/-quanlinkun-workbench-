@@ -6,19 +6,21 @@ const D = window.APP_DATA;
 function esc(s){ return (s ?? "").toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 /* ---------- 主题 ---------- */
+// 构建版本号：每次部署改它，用于跨版本强制回到默认深空主题（除非用户手动选过其它）
+const WB_APP_VER = "2026-08-28c";
 function applyTheme(t){
   document.documentElement.setAttribute("data-theme", t);
   localStorage.setItem("wb_theme", t);
 }
 function initTheme(){
-  // 深空主题上线后的一次性迁移：老用户（本地已存 light/dark）首次打开升级为 space，
-  // 迁移后仍尊重用户后续手动选择的主题。
-  const migrated = localStorage.getItem("wb_theme_space");
   let t = localStorage.getItem("wb_theme");
-  if (!t || !migrated){
-    t = "space";
-    localStorage.setItem("wb_theme_space", "1");
+  const override = localStorage.getItem("wb_theme_override"); // 用户主动点过主题按钮才算
+  const savedVer = localStorage.getItem("wb_app_ver");
+  if (savedVer !== WB_APP_VER){
+    localStorage.setItem("wb_app_ver", WB_APP_VER);
+    if (!override) t = "space"; // 新部署默认深空，尊重用户已有明确选择
   }
+  if (!t) t = "space";
   applyTheme(t);
 }
 
@@ -870,7 +872,7 @@ function renderSettings(){
     </div>`;
   $("#content").appendChild(c);
 }
-function setTheme(t){ applyTheme(t); renderSettings(); }
+function setTheme(t){ applyTheme(t); localStorage.setItem("wb_theme_override","1"); renderSettings(); }
 function toggleParticles(on){
   if (window.SpaceParticles) window.SpaceParticles.setOn(on);
   renderSettings();
@@ -924,9 +926,20 @@ function init(){
   $("#closeSidebar").onclick = closeSidebar;
   $("#overlay").onclick = closeSidebar;
   go("home");
-  // 注册 Service Worker（离线可用）
+  // 注册 Service Worker（离线可用）；检测到新版本自动刷新，避免一直用旧缓存页面
   if("serviceWorker" in navigator){
-    navigator.serviceWorker.register("sw.js").catch(()=>{});
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      reg.addEventListener("updatefound", () => {
+        const sw = reg.installing;
+        if (!sw) return;
+        sw.addEventListener("statechange", () => {
+          // 旧 Service Worker 仍在控制页面、且新版本已安装完成 -> 自动刷新以加载新页面
+          if (sw.state === "installed" && navigator.serviceWorker.controller){
+            window.location.reload();
+          }
+        });
+      });
+    }).catch(()=>{});
   }
 }
 init();
