@@ -1,126 +1,137 @@
 {
   "meta": {
-    "date": "2026-08-27",
-    "generated": "2026-08-27T22:05:00+08:00",
-    "note": "本文件由每日自动化从网络近期雅思考题话题（2026 真实考题）生成，覆盖阅读/听力/口语/写作/每日精读。应用启动优先读取本文件；若加载失败自动回退到内置静态题库。",
+    "date": "2026-08-28",
+    "generated": "2026-08-28T18:35:48+08:00",
+    "note": "本文件由每日自动化从网络近期雅思考题话题（2026 年 8 月真实考题/回忆）生成，覆盖阅读/听力/口语/写作/每日精读。应用启动优先读取本文件；若加载失败自动回退到内置静态题库。",
     "sources": [
-      "allthingsielts.com/recent-exam-questions.php",
-      "ieltsupdatesandrecentexams.com",
-      "examword.com/ielts-practice/writing-exam-academic",
-      "simplyielts.com/ielts-speaking-topics",
-      "talkdrill.com/blog/exams/ielts-speaking/ielts-speaking-topics-2026"
+      "allthingsielts.com/ielts-writing/essay-topics-bank.php",
+      "allthingsielts.com/ielts-speaking/topics/media",
+      "allthingsielts.com/ielts-speaking/part-2-cue-cards",
+      "allthingsielts.com/ielts-speaking/topics/education",
+      "simplyielts.com/economic-development-vs-nature-ielts-task-2-essay/",
+      "simplyielts.com/the-rise-of-self-employment-ielts-task-2-essay",
+      "simplyielts.com/describe-an-app-you-use-often-ielts-speaking-cue-card",
+      "simplyielts.com/ielts-speaking-technology-and-social-media-topics-2026-guide",
+      "tramnguyenielts.com/post/tong-hop-de-thi-ielts-writing-2024-2025-moi-nhat",
+      "yeyulingfeng.com/a/936000.html",
+      "ieltscity.vn/de-thi-ielts-writing-2026/"
     ]
   },
   "readingPassage": {
-    "title": "Urban Vertical Farming: Feeding Cities Indoors (A 类学术·近期话题)",
-    "text": "Urban vertical farming — the practice of growing crops in stacked layers within controlled indoor environments — has moved from niche experiment to a serious candidate for feeding cities. Proponents argue that by using LED lighting and precise hydroponic systems, a single warehouse can produce the equivalent of several hectares of traditional farmland while using up to 95% less water. In regions where arable land is scarce or transport costs are high, this efficiency is compelling.\n\nHowever, critics point to the energy bill. Artificial lighting and climate control consume significant electricity, and unless that power comes from renewables, the carbon footprint can exceed that of conventional agriculture. A 2023 lifecycle study in the Netherlands found that vertically farmed lettuce emitted more CO2 per kilogram than field-grown lettuce when the grid relied on fossil fuels.\n\nEconomically, the model remains fragile. High setup costs and the need for skilled operators mean most vertical farms still depend on subsidies or premium pricing. Yet advocates counter that as renewable energy cheapens and automation improves, the balance will shift. Several Asian cities already integrate vertical farms into residential towers, suggesting a possible template for dense urban futures.",
+    "title": "Bird Migration: The Science of Seasonal Journeys (A 类学术·2026-08-15 真题话题)",
+    "text": "Bird migration is one of the most remarkable phenomena in the natural world. Every year, billions of birds travel thousands of kilometres between their breeding grounds and wintering sites, guided by an internal compass that remains only partly understood. Young birds attempting their first journey must rely on innate programming rather than the experience of elders, which makes the initial migration especially hazardous.\n\nNavigation depends on several cues. Many species use the position of the sun by day and the stars by night, while others detect the Earth's magnetic field through specialised cells. Seasonal changes in day length trigger the urge to move, and favourable winds are exploited whenever they appear. Birds that migrate at night often fly beneath a clear, visible sky so that celestial landmarks remain available throughout the journey.\n\nSurvival during migration is far from guaranteed. Predators such as hawks and falcons patrol busy migration corridors, and exhaustion leaves stragglers vulnerable. Parental investment is greatest before departure, when adults fatten chicks for the demands ahead, yet once the young fledge they receive no further guidance. Those that become separated from their flock are easily lost, and many never complete the return trip. Conservationists argue that protecting stopover habitats is therefore as vital as safeguarding the destinations themselves.",
     "qs": [
-      { "type": "判断", "q": "Vertical farming uses MORE water than traditional farming.", "answer": "FALSE",
-        "loc": "using up to 95% less water",
-        "para": "more water ↔ 原文 95% less water（反义替换，注意比较方向）。",
-        "trap": "题干把 less 偷换成 more，典型反向陷阱。",
-        "explain": "原文明确说少用 95% 水，题干说用更多，故 FALSE。" },
-      { "type": "填空", "q": "A single warehouse can equal several hectares of ______ farmland.", "answer": "traditional",
-        "loc": "equivalent of several hectares of traditional farmland",
-        "para": "equal ↔ equivalent；farmland 原词复现。",
-        "trap": "空后 farmland 为原词，定位后 traditional 即答案。",
-        "explain": "填 traditional。" },
-      { "type": "选择", "q": "According to the 2023 Dutch study, vertically farmed lettuce had a higher ______ than field-grown.", "options": [{"v":"A","t":"water use"},{"v":"B","t":"carbon footprint"},{"v":"C","t":"production cost"}], "answer": "B",
-        "loc": "emitted more CO2 per kilogram than field-grown lettuce when the grid relied on fossil fuels",
-        "para": "higher ↔ more CO2；carbon footprint ↔ CO2 emissions。",
-        "trap": "研究对比的是碳排放，不是用水或成本。",
-        "explain": "选 B。" },
-      { "type": "匹配", "q": "Which heading best fits Paragraph 3?", "options": [{"v":"A","t":"Economic challenges and future outlook"},{"v":"B","t":"Environmental benefits"},{"v":"C","t":"Technological details"}], "answer": "A",
-        "loc": "Economically, the model remains fragile ... the balance will shift.",
-        "para": "economically / future ↔ heading A。",
-        "trap": "第三段核心是经济脆弱性与未来展望，B 是第二段，C 未提及。",
+      { "type": "选择", "q": "What primarily guides young birds on their first migration?", "options": [{"v":"A","t":"Innate programming"},{"v":"B","t":"Experience of elders"},{"v":"C","t":"Human tracking devices"}], "answer": "A",
+        "loc": "rely on innate programming rather than the experience of elders",
+        "para": "first journey ↔ innate programming；rather than experience of elders。",
+        "trap": "题干问 young birds first journey，对应 innate programming，而非 elders 的经验。",
         "explain": "选 A。" },
-      { "type": "选择", "q": "Why do most vertical farms still depend on subsidies?", "options": [{"v":"A","t":"Lack of consumer demand"},{"v":"B","t":"High setup costs and need for skilled operators"},{"v":"C","t":"Poor crop yields"}], "answer": "B",
-        "loc": "High setup costs and the need for skilled operators mean most vertical farms still depend on subsidies",
-        "para": "depend on subsidies ↔ High setup costs and skilled operators。",
-        "trap": "定位 depend on subsidies 一句，直接对应 B。",
-        "explain": "选 B。" }
+      { "type": "选择", "q": "Which of the following is NOT mentioned as a navigation cue?", "options": [{"v":"A","t":"The sun"},{"v":"B","t":"The Earth's magnetic field"},{"v":"C","t":"Ocean currents"}], "answer": "C",
+        "loc": "use the position of the sun ... detect the Earth's magnetic field",
+        "para": "文中明确提到 sun 与 magnetic field，未提及 ocean currents。",
+        "trap": "C 为无中生有，属典型 NOT given 干扰。",
+        "explain": "选 C。" },
+      { "type": "填空", "q": "At night, birds prefer a clear, ______ sky to keep celestial landmarks available.", "answer": "visible",
+        "loc": "beneath a clear, visible sky",
+        "para": "clear, visible sky ↔ 题干。",
+        "trap": "visible 拼写注意 -ible 结尾。",
+        "explain": "填 visible。" },
+      { "type": "填空", "q": "______ such as hawks and falcons threaten migrating birds along busy corridors.", "answer": "Predators",
+        "loc": "Predators such as hawks and falcons patrol",
+        "para": "predators ↔ 题干；hawks and falcons 为举例。",
+        "trap": "句首需大写 Predators。",
+        "explain": "填 Predators。" },
+      { "type": "填空", "q": "Before departure, adults provide ______ investment by fattening chicks.", "answer": "parental",
+        "loc": "Parental investment is greatest before departure",
+        "para": "parental investment ↔ 题干。",
+        "trap": "parental 拼写（parent + al），易误写为 parent。",
+        "explain": "填 parental。" },
+      { "type": "填空", "q": "Young birds that separate from the flock are easily ______.", "answer": "lost",
+        "loc": "Those that become separated from their flock are easily lost",
+        "para": "separated ↔ 题干；easily lost 原词复现。",
+        "trap": "lost 为过去分词，注意 t 结尾。",
+        "explain": "填 lost。" }
     ]
   },
   "listeningSets": [
-    { "module": "listening", "title": "Section 2 · 生活资讯（博物馆特展导览）",
-      "transcript": "Welcome to the Riverside Museum. Our temporary exhibition, Timeless Textiles, runs until the 30th of September. Entry is free for members; for non-members, tickets are 8 pounds for adults and 5 pounds for children. The exhibition opens at 10 a.m. and the last admission is at 4.30 p.m. Guided tours leave from the main hall at 11 a.m. and 2 p.m. daily. Please note that photography is not permitted in the final gallery.",
+    { "module": "listening", "title": "Section 1 · 生活场景（度假小屋预订）",
+      "transcript": "Hello, you've reached Lakeside Holidays. My name's Sarah, how can I help? — Hi, I'd like to book a cottage for the weekend of the 14th of September. — Certainly. We have the Willow Cottage, which sleeps four, at 120 pounds per night, and the larger Oak Cottage at 180 pounds per night. Both include heating and parking. — Does the price include breakfast? — No, breakfast isn't included, but there's a cafe next door that opens at 8 a.m. Check-in is from 3 p.m. and check-out is by 10 a.m. — Great. And is it pet-friendly? — Yes, but there's a 15-pound cleaning fee for pets. We also ask for a 50-pound deposit when you book. — Perfect, I'll take the Oak Cottage.",
       "qs": [
-        { "type": "填空", "q": "The exhibition ends on the ______ of September.", "answer": "30th",
-          "loc": "runs until the 30th of September", "para": "ends ↔ runs until。", "trap": "序数词 30th 拼写易错，注意 th。", "explain": "填 30th。" },
-        { "type": "填空", "q": "Adult ticket price: ______ pounds.", "answer": "8",
-          "loc": "tickets are 8 pounds for adults", "para": "adult ↔ adults。", "trap": "区分成人 8 与儿童 5。", "explain": "填 8。" },
-        { "type": "填空", "q": "Last admission: ______ p.m.", "answer": "4.30",
-          "loc": "the last admission is at 4.30 p.m.", "para": "last admission ↔ 4.30 p.m.。", "trap": "时间考点，4.30 易误听为 fourteen thirty 后写错。", "explain": "填 4.30。" },
-        { "type": "选择", "q": "When do guided tours depart?", "options": [{"v":"A","t":"10 a.m. and 2 p.m."},{"v":"B","t":"11 a.m. and 2 p.m."},{"v":"C","t":"11 a.m. and 4 p.m."}], "answer": "B",
-          "loc": "Guided tours leave ... at 11 a.m. and 2 p.m. daily", "para": "tours depart ↔ leave。", "trap": "开场 10 a.m. 是开馆时间，易误选 A。", "explain": "选 B。" },
-        { "type": "判断", "q": "Photography is allowed in all galleries.", "answer": "FALSE",
-          "loc": "photography is not permitted in the final gallery", "para": "all galleries ↔ not permitted in the final gallery。", "trap": "final gallery 禁止，故并非全部允许。", "explain": "选 FALSE。" }
+        { "type": "填空", "q": "The booking is for the weekend of the ______ of September.", "answer": "14th",
+          "loc": "weekend of the 14th of September", "para": "weekend ↔ 14th of September。", "trap": "序数词 14th 拼写易错，注意 th。", "explain": "填 14th。" },
+        { "type": "填空", "q": "Price of the Oak Cottage: ______ pounds per night.", "answer": "180",
+          "loc": "Oak Cottage at 180 pounds per night", "para": "Oak ↔ 180。", "trap": "区分 Oak 180 与 Willow 120。", "explain": "填 180。" },
+        { "type": "填空", "q": "Check-out time: by ______ a.m.", "answer": "10",
+          "loc": "check-out is by 10 a.m.", "para": "check-out ↔ 10 a.m.。", "trap": "区分 check-in 3 p.m. 与 check-out 10 a.m.。", "explain": "填 10。" },
+        { "type": "填空", "q": "Pet cleaning fee: ______ pounds.", "answer": "15",
+          "loc": "15-pound cleaning fee for pets", "para": "cleaning fee ↔ 15。", "trap": "区分 15 清洁费 与 50 押金。", "explain": "填 15。" },
+        { "type": "判断", "q": "Breakfast is included in the cottage price.", "answer": "FALSE",
+          "loc": "breakfast isn't included", "para": "included ↔ isn't included。", "trap": "题干说 included，原文否定。", "explain": "选 FALSE。" }
       ] },
-    { "module": "listening", "title": "Section 2 · 社区信息（社区花园）",
-      "transcript": "The Green Lane Community Garden was established in 2015. Today it has 40 plots available to local residents for an annual fee of 30 pounds. Water is provided free of charge. The garden is open from dawn to dusk. New members must attend a short orientation session held on the first Saturday of each month at 9 a.m.",
+    { "module": "listening", "title": "Section 3 · 学术场景（生态小组作业讨论）",
+      "transcript": "Right, so for our ecology presentation we need to cover three case studies. I think we should start with the bee population decline in Europe — the data from 2019 to 2023 shows a 30% drop. — Okay. And the second one could be coral bleaching on the Great Barrier Reef. The professor said we must mention the role of rising sea temperatures. — Good. For the third, how about urban heat islands? A study in our city found summer temperatures were 4 degrees higher in the centre than in the suburbs. — That works. We've got 15 minutes total, so about 5 minutes each. Don't forget we need at least two references per case study. — Agreed. I'll handle the first two and you take the third. We'll meet on Thursday at 2 p.m. to rehearse.",
       "qs": [
-        { "type": "填空", "q": "The garden was established in ______.", "answer": "2015",
-          "loc": "established in 2015", "para": "established ↔ established。", "trap": "年份考点，注意 2015 与 2016 区分。", "explain": "填 2015。" },
-        { "type": "填空", "q": "Number of plots available: ______.", "answer": "40",
-          "loc": "has 40 plots available", "para": "number of plots ↔ 40 plots。", "trap": "数字 40，注意与 14 区分。", "explain": "填 40。" },
-        { "type": "填空", "q": "Annual fee: ______ pounds.", "answer": "30",
-          "loc": "annual fee of 30 pounds", "para": "annual fee ↔ 30 pounds。", "trap": "区分年费 30 与可能的月费。", "explain": "填 30。" },
-        { "type": "填空", "q": "Orientation is on the first ______ of each month.", "answer": "Saturday",
-          "loc": "first Saturday of each month", "para": "first ______ ↔ first Saturday。", "trap": "Saturday 拼写较长，注意 -day 结尾。", "explain": "填 Saturday。" },
-        { "type": "判断", "q": "Water is free of charge for members.", "answer": "TRUE",
-          "loc": "Water is provided free of charge", "para": "free ↔ free of charge。", "trap": "直接同义复现。", "explain": "选 TRUE。" }
+        { "type": "填空", "q": "Bee population in Europe dropped by ______ % between 2019 and 2023.", "answer": "30",
+          "loc": "30% drop", "para": "drop ↔ 30%。", "trap": "百分比 30，注意与年份区分。", "explain": "填 30。" },
+        { "type": "填空", "q": "The second case study is about coral ______ on the Great Barrier Reef.", "answer": "bleaching",
+          "loc": "coral bleaching on the Great Barrier Reef", "para": "coral ↔ bleaching。", "trap": "bleaching 拼写较长，注意 -ch-。", "explain": "填 bleaching。" },
+        { "type": "填空", "q": "Urban centre temperatures were ______ degrees higher than suburbs.", "answer": "4",
+          "loc": "4 degrees higher in the centre than in the suburbs", "para": "higher ↔ 4 degrees。", "trap": "数字 4 度，注意与 2 p.m. 混淆。", "explain": "填 4。" },
+        { "type": "选择", "q": "How long is the total presentation?", "options": [{"v":"A","t":"10 minutes"},{"v":"B","t":"15 minutes"},{"v":"C","t":"20 minutes"}], "answer": "B",
+          "loc": "We've got 15 minutes total", "para": "total ↔ 15 minutes。", "trap": "混淆每人 5 分钟（15/3）。", "explain": "选 B。" },
+        { "type": "判断", "q": "The two students will rehearse on Thursday at 2 p.m.", "answer": "TRUE",
+          "loc": "meet on Thursday at 2 p.m. to rehearse", "para": "rehearse ↔ Thursday at 2 p.m.。", "trap": "直接同义复现。", "explain": "选 TRUE。" }
       ] }
   ],
   "speaking": {
     "part1": [
-      { "topic": "AI tools（2026 新题）", "q": "Do you use any AI tools in your daily life? How have they changed the way you study or work?",
-        "tip": "Band 7+ 思路：给具体场景，如 summarising articles / drafting emails，别说只会说 very useful。例：I use AI to summarise long articles, which saves me a lot of time before meetings." },
-      { "topic": "Social media content（2026 新题）", "q": "Do you create any content online? What type of videos or posts do you usually watch?",
-        "tip": "区分创作与消费；可谈 short videos / tutorials，并说明频率。" },
-      { "topic": "Morning routine（2026 新题）", "q": "Are you a morning person or a night person? Describe your typical morning routine.",
-        "tip": "用时间顺序展开 2-3 句，体现连贯与时态准确。" }
+      { "topic": "Social media（2026 高频）", "q": "Do you use social media often? What do you usually use it for, and do you try to limit your screen time?",
+        "tip": "Band 7+ 思路：给具体 App 与频率（Instagram/WhatsApp），并用对比结构说明限制习惯，别说只会 very useful。" },
+      { "topic": "Technology（2026 高频）", "q": "What is your favourite piece of technology? Why is it so important in your daily life?",
+        "tip": "用具体功能展开（导航/学习/支付），体现 user-friendly、convenient 等词汇，避免泛泛而谈。" },
+      { "topic": "News & media（2026 高频）", "q": "How do you usually get your news — newspapers, TV, or social media? Has this changed over the years?",
+        "tip": "对比过去（报纸/电视）与现在（社媒），使用现在完成时与过去时体现变化。" }
     ],
     "part2": [
-      { "topic": "Describe a place where you go to relax（高频）", "bullets": ["where it is","how often you go there","what you do there","why it helps you relax"],
-        "tip": "开头：The place I find most relaxing is... 用感官描写（声音/光线/气味）撑满 2 分钟。" },
-      { "topic": "Describe a person who taught you something valuable", "bullets": ["who the person is","what they taught you","how they taught it","why it was valuable"],
-        "tip": "用具体事例 + 一句引言更容易拿高分，结尾点明影响。" },
-      { "topic": "Describe a time you received unexpected good news", "bullets": ["what the news was","who told you","when it happened","how you felt"],
-        "tip": "全程过去时叙述，结尾点明情绪的前后变化。" }
+      { "topic": "Describe an app you use often（验证 2026 当季卡）", "bullets": ["what the app is","how long you have used it","what you use it for","why you find it useful"],
+        "tip": "讲具体习惯 + 一个改变 + 明确好处，用故事化展开撑满 2 分钟，切忌只罗列功能。" },
+      { "topic": "Describe a TV programme or film you enjoyed recently（高频）", "bullets": ["what it was","what it was about","when you watched it","why you enjoyed it"],
+        "tip": "开头点题，用感官与细节描写（画面/叙事），结尾点明感动或启发。" },
+      { "topic": "Describe a teacher who influenced you（高频）", "bullets": ["who the teacher was","what subject they taught","how they influenced you","why it mattered"],
+        "tip": "用具体事例 + 一句引言，结尾点明对学习的长远影响。" }
     ],
     "part3": [
-      { "topic": "Technology and relaxation", "q": "Has technology made it easier or harder for people to relax? Why?",
-        "tip": "辩证回答：便利（冥想 App）vs 信息过载（随时在线）。" },
-      { "topic": "Learning from others", "q": "Is it better to learn skills from others or by yourself? Why?",
-        "tip": "对比两种方式优劣，给出个人倾向并举例。" },
-      { "topic": "Good news in society", "q": "Do you think the media should report more good news? Why or why not?",
-        "tip": "从公众情绪与新闻价值两个角度展开。" }
+      { "topic": "Phone dependence", "q": "Why do so many people find it hard to put their phones down?",
+        "tip": "从即时反馈/多巴胺、社交焦虑、工作随时在线三个角度展开。" },
+      { "topic": "Apps and life", "q": "Do smartphone apps make our lives easier or more complicated?",
+        "tip": "辩证：便利（支付/导航）vs 信息过载与依赖，给出个人倾向并举例。" },
+      { "topic": "Media and society", "q": "How has social media changed the way people communicate?",
+        "tip": "双刃剑：连接更方便 vs 深度对话减少、表情符号替代语气。" }
     ]
   },
   "dailyDialogue": [
-    { "q": "What is something new you have tried recently?", "tip": "用现在完成时：I have recently tried..." },
-    { "q": "How do you usually spend a rainy day?", "tip": "自然口语：Honestly, I just..." },
-    { "q": "If a friend visited your city, where would you take them first?", "tip": "用 would + 地点 + 理由，虚拟语气。" }
+    { "q": "How has technology changed the way you keep in touch with friends?", "tip": "用 now... whereas before... 对比，体现时态。" },
+    { "q": "Do you think people rely too much on apps these days? Why or why not?", "tip": "用 crutch / over-reliance 等词，给一个具体例子。" },
+    { "q": "What kinds of apps are most popular among young people where you live?", "tip": "按 entertainment / communication / education 分类作答。" }
   ],
   "dailySentence": [
-    "Vertical farms promise higher yields, yet their energy demands pose a sustainability paradox.",
-    "Although renewable costs have fallen, the upfront capital for automation remains prohibitive for many operators.",
-    "Not only does urban farming shorten supply chains, but it also reconnects city dwellers with food production."
+    "Although bird migration is driven by innate programming, the survival of fledglings depends heavily on favourable weather and the absence of predators along the route.",
+    "While economic growth creates jobs and tax revenue, its long-term viability rests on ecosystems that environmental degradation threatens to undermine.",
+    "Not only does self-employment offer autonomy and uncapped income, but it also exposes workers to irregular earnings and the absence of an institutional safety net."
   ],
   "writing": {
     "task2": [
-      { "prompt": "Government funding for the arts is a waste of money when there are more pressing issues like healthcare and education. To what extent do you agree or disagree?（真实考题，2026-03-22）",
-        "outline": "Intro：改写题目 + 立场（部分同意）。Body1：医疗、教育确应优先，艺术预算常被削减。Body2：但艺术有文化与社会价值，且占比通常很小。Conclusion：应平衡分配，而非一刀切削减。",
-        "source": "allthingsielts.com" },
-      { "prompt": "Some people believe that robots are very important for the future of human development, while others believe that they are dangerous and have a negative impact on society. Discuss both views and give your opinion.（真实考题，2026-05，USA）",
-        "outline": "Intro：双方观点并重引出。Body1：机器人提升制造与医疗效率、替代危险工作。Body2：带来就业替代与伦理风险。Conclusion：在监管框架下善用，利大于弊。",
-        "source": "ieltsupdatesandrecentexams.com" }
+      { "prompt": "Some people think that economic development should be the most important goal of governments, while others argue that protecting the natural world is more important. Discuss both views and give your opinion. （真实考题，reported 2026-08-08，simplyielts 验证）",
+        "outline": "Intro：改写题目 + 立场（nature first，但承认经济重要）。Body1：经济发展创造就业与税收，穷国常需资源开发。Body2：环境是经济的基础，破坏不可逆，且绿色产业也能创造就业。Conclusion：可持续 = 以环境为底，而非二选一。",
+        "source": "simplyielts.com" },
+      { "prompt": "In many countries, more and more people are choosing to work for themselves rather than for an employer. What are the reasons for this trend? Do the advantages of self-employment outweigh the disadvantages? （真实考题，reported 2026-08，simplyielts 验证）",
+        "outline": "Intro：点明原因并给出 outweigh 立场（利大于弊）。Body1：原因——平台降低门槛、远程工作改变预期、对企业忠诚下降。Body2：利（自主/收入无上限/技能可见）vs 弊（收入不稳/无保障/孤独，但可控）。Conclusion：重申利大于弊，弊端可通过规划缓解。",
+        "source": "simplyielts.com" }
     ],
     "task1": [
-      { "prompt": "The pie charts show the proportion of electricity produced by different energy sources in four countries in 2008. Summarise the main features and make comparisons where relevant.（真实 Task 1 话题，2026）",
-        "outline": "开头总述四国差异；主体按 renewable 与 non-renewable 分组对比，指出最绿色与最依赖化石的国家；结尾概括总体趋势。",
-        "source": "examword.com" }
+      { "prompt": "The table shows the amount of electricity generated from five different energy sources in the UK in three different years. Summarise the main features and make comparisons where relevant. （真实 Task 1，2026-08-15 真题回忆）",
+        "outline": "开头总述表含 5 种能源、3 个年份与英国背景；主体按总量趋势（如 nuclear / wind 上升、coal 下降）分组对比，指出最大与最小来源；结尾概括结构性变化。",
+        "source": "yeyulingfeng.com" }
     ]
   }
 }
