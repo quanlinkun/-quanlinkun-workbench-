@@ -11,7 +11,14 @@ function applyTheme(t){
   localStorage.setItem("wb_theme", t);
 }
 function initTheme(){
-  const t = localStorage.getItem("wb_theme") || "space";
+  // 深空主题上线后的一次性迁移：老用户（本地已存 light/dark）首次打开升级为 space，
+  // 迁移后仍尊重用户后续手动选择的主题。
+  const migrated = localStorage.getItem("wb_theme_space");
+  let t = localStorage.getItem("wb_theme");
+  if (!t || !migrated){
+    t = "space";
+    localStorage.setItem("wb_theme_space", "1");
+  }
   applyTheme(t);
 }
 

@@ -1,4 +1,4 @@
-const CACHE = "quanlinkun-v3";
+const CACHE = "quanlinkun-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -36,14 +36,16 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(req.url);
   // 仅缓存同源资源（跨域 RSS 不缓存，保证离线时静态页可打开）
   if (url.origin !== location.origin) return;
+  // 网络优先：在线时总能拿到最新版本并顺带更新缓存；离线时回退缓存，保证 PWA 仍可用
   e.respondWith(
-    caches.match(req).then((cached) => {
-      const network = fetch(req).then((res) => {
+    fetch(req).then((res) => {
+      if (res && res.status === 200 && res.type === "basic"){
         const copy = res.clone();
         caches.open(CACHE).then((c) => c.put(req, copy));
-        return res;
-      });
-      return cached || network;
-    })
+      }
+      return res;
+    }).catch(() =>
+      caches.match(req).then((c) => c || caches.match("./index.html"))
+    )
   );
 });
