@@ -6,21 +6,22 @@ const D = window.APP_DATA;
 function esc(s){ return (s ?? "").toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 /* ---------- 主题 ---------- */
-// 构建版本号：每次部署改它，用于跨版本强制回到默认深空主题（除非用户手动选过其它）
-const WB_APP_VER = "2026-08-28c";
+// 构建版本号：每次部署改它，用于跨版本回到下面的默认主题
+const WB_APP_VER = "2026-08-30a";
+const WB_DEFAULT_THEME = "light"; // 默认恢复为原来的金黄配色
 function applyTheme(t){
   document.documentElement.setAttribute("data-theme", t);
   localStorage.setItem("wb_theme", t);
 }
 function initTheme(){
   let t = localStorage.getItem("wb_theme");
-  const override = localStorage.getItem("wb_theme_override"); // 用户主动点过主题按钮才算
   const savedVer = localStorage.getItem("wb_app_ver");
   if (savedVer !== WB_APP_VER){
     localStorage.setItem("wb_app_ver", WB_APP_VER);
-    if (!override) t = "space"; // 新部署默认深空，尊重用户已有明确选择
+    localStorage.removeItem("wb_theme_override");
+    t = WB_DEFAULT_THEME;
   }
-  if (!t) t = "space";
+  if (!t) t = WB_DEFAULT_THEME;
   applyTheme(t);
 }
 

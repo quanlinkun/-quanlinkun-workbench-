@@ -1,4 +1,4 @@
-const CACHE = "quanlinkun-v5";
+const CACHE = "quanlinkun-v6";
 const ASSETS = [
   "./",
   "./index.html",

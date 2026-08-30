@@ -24,7 +24,8 @@
     try { v = localStorage.getItem(KEY); } catch (e) { v = null; }
     if (v === "off") return false;
     if (v === "on") return true;
-    return !REDUCED;
+    // 默认关闭：恢复原有简洁外观（浅色主题下粒子会显杂乱），可在设置里手动开启
+    return false;
   }
 
   function seed(){
